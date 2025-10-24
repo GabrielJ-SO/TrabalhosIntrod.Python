@@ -32,8 +32,15 @@ class ClientesCadastrados:
     def buscar_cliente_cpf(self, cpf):
         """Busca um cliente de dentro do conjunto pelo CPF"""
 
-        if self._clientes.__contains__(Cliente("", cpf)):
-            print(Cliente(" ", cpf).__str__())
+        #A expressão entre parênteses é um gerador
+        # Ele procura o cliente onde cliente.cpf é igual ao desejado
+        cliente_encontrado = next(
+            (cliente for cliente in self._clientes if cliente.cpf == cpf),
+            None  # Este é o 'default'. Retorna None se não encontrar nenhum
+        )
+
+        if cliente_encontrado:
+            print(f"Cliente encontrado: {cliente_encontrado.__str__()}")
         else:
-            print(f"Cliente com CPF '{cpf}' não existe, ou ainda não foi cadastrado")
+            print("Cliente não encontrado.")
               

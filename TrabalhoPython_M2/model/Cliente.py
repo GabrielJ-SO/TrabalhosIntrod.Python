@@ -64,7 +64,7 @@ class Cliente:
 
         return f"Nome: {self._nome} | CPF: {self._cpf} | Livros emprestados: {len(self._lista_emprestimos)}"
     
-    def __eq__(self, value:str) -> bool:
+    def __eq__(self, value) -> bool:
         """Metodo de comparação entre dois objetos Cliente
         Args:
             value (Cliente): Objeto Cliente a ser comparado

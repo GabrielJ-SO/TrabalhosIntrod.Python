@@ -42,12 +42,6 @@ class Livro:
 
         self._quantidade_disponivel = quantidade
 
-    def __str__(self) -> str:
-        """Exibe as informações do livro:
-        Título, Autor, Ano de Publicação e Quantidade Disponível.
-        """
-        return f"Título: {self._titulo}\nAutor: {self._autor}\nAno de Publicação: {self._ano_publicacao}\nQuantidade Disponível: {self._quantidade_disponivel}\n"
-    
     def adicionar_livro(self, quantidade: int):
         """Adiciona uma quantidade ao estoque do livro
          Args:
@@ -82,3 +76,12 @@ class Livro:
         self._quantidade_disponivel -= quantidade
         print(f"Quantidade removida: {quantidade}")
         
+    def __eq__():
+        """"""
+        
+    def __str__(self) -> str:
+        """Exibe as informações do livro:
+        Título, Autor, Ano de Publicação e Quantidade Disponível.
+        """
+        return f"Título: {self._titulo} | Autor: {self._autor} | Ano de Publicação: {self._ano_publicacao} | Quantidade Disponível: {self._quantidade_disponivel}"
+    

@@ -1,10 +1,12 @@
 
 import os
 from controller.ClientesCadastrados import ClientesCadastrados
+from controller.EstoqueLivros import EstoqueLivros
 from model.Cliente import Cliente
 from model.Livro import Livro
 
 lista_clientes = ClientesCadastrados()
+lista_livros = EstoqueLivros()
 
 livro1 = Livro("O Senhor dos Anéis", "J.R.R. Tolkien", 1954, 10)
 
@@ -17,13 +19,12 @@ def menu() -> str:
     return f"=============Menu de Opções=============\n" \
             f"1. Cadastrar cliente\n" \
             f"2. Cadastrar livro\n" \
-            f"3. Listar livros em estoque\n" \
+            f"3. Consultar livros\n" \
             f"4. Realizar empréstimo\n" \
             f"5. Realizar devolução\n" \
             f"6. Exibir empréstimos de um cliente\n" \
-            f"7. Consultar livro\n" \
-            f"8. Clientes cadastrados\n" \
-            f"9. Sair\n" \
+            f"7. Clientes cadastrados\n" \
+            f"0. Sair\n" \
             f"========================================\n" \
 #Opção 1
 def cadastrar_cliente():
@@ -52,8 +53,36 @@ def cadastrar_livro():
     quantidade = int(input("Quantidade em Estoque: "))
 
     novo_livro = Livro(titulo, autor, ano_publicacao, quantidade)
+    lista_livros.adicionar_livro_aoestoque(novo_livro)
 
     print(f'Livro "{titulo}" do autor "{autor}" cadastrado com sucesso.')
+
+#Opção 3
+def cosulta_livros_cadastrados():
+
+    print (f"1. Consultar livro por titulo.\n"
+           f"2. Buscar livros de um autor. \n" \
+           f"3. Listar livros cadastrados.\n" )
+    
+    escolha = input("Escolha uma opção: ")
+
+    if escolha == "1":
+        titulo = input("Titulo do livro: ")
+        lista_livros.buscar_livro_titulo(titulo)
+
+    elif escolha == "2":
+        autor = input("Nome do autor: ")
+        lista_livros.buscar_livros_autor(autor)
+
+    elif escolha == "3":
+        lista_livros.listar_livros_emestoque()
+
+    else:
+        print("Opção invalida.")
+
+#Opção 4
+def realizar_emprestimo():
+    """"""
     
 #Opção 8
 def consulta_clientes_cadastrados():
