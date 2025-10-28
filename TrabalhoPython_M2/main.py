@@ -3,22 +3,18 @@ import os
 import utils.Utils as Utils
 from model.Livro import Livro
 from controller.EstoqueLivros import EstoqueLivros
+from model.Cliente import Cliente
 
 
-estoque = EstoqueLivros()
 
-livro1 = Livro("O Senhor dos Anéis", "J.R.R. Tolkien", 1954, 10)
-
-print(livro1)
 
 opcoes = {"1": Utils.cadastrar_cliente,
          "2": Utils.cadastrar_livro,
          "3": Utils.cosulta_livros_cadastrados,
-         "4": "Realizar empréstimo",
-         "5": "Realizar devolução",
-         "6": "Exibir empréstimos de um cliente",
-         "7": Utils.consulta_clientes_cadastrados,
-         "0": "Sair"}
+         "4": Utils.realizar_emprestimo,
+         "5": Utils.realizar_devolucao,
+         "6": Utils.listar_emprestimos_cliente,
+         "7": Utils.consulta_clientes_cadastrados}
 
 while True:
     print(Utils.menu())

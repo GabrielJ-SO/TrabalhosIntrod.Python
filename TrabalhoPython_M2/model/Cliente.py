@@ -29,39 +29,48 @@ class Cliente:
         """Metodo getter para o atributo ListaEmprestimos"""
         return self._lista_emprestimos
     
-    def adicionar_emprestimo(self, livro: Livro):
+    @lista_emprestimos.setter
+    def lista_emprestimos(self, lista_emprestimos):
+        self._lista_emprestimos = lista_emprestimos
+
+    def adicionar_emprestimo(self, livro: str):
         """Adiciona um empréstimo à lista de empréstimos do cliente
 
         Args:
             emprestimo (Livro): Livro emprestado
         """
+        self._lista_emprestimos.append(livro)
 
-        self._lista_emprestimos.append(livro)  
-        print(f'\nEmpréstimo do livro "{livro.titulo}" adicionado à lista de emprestimos do(a) cliente {self._nome}.\n')
-        livro.remover_livro(1)
-
-    def remover_emprestimo(self, livro: Livro):
+    def remover_emprestimo(self, livro: str):
         """Remove um empréstimo da lista de empréstimos do cliente
 
         Args:
             emprestimo (Livro): Livro devolvido
         """
 
-        livro.adicionar_livro(1)
         self._lista_emprestimos.remove(livro)
-        print(f'\nEmpréstimo do livro "{livro.titulo}" removido da lista de emprestimos do(a) cliente {self._nome}.\n')
+        print(f'\nEmpréstimo do livro "{livro}" removido da lista de emprestimos do(a) cliente {self._nome}.\n')
     
     def exibe_emprestimos_cliente(self):
         """Exibe os empréstimos do cliente"""
         for livro in self._lista_emprestimos:
             print(f"Livro: {livro.titulo} - Autor: {livro.autor}")
 
+    def save(self):
+        """Retorna uma string formatada para savar as informações do cliente em um arquivo
+        Returns:
+            str: String formatada com as informações do cliente"""
+        
+        titulos = [titulo for titulo in self._lista_emprestimos]
+        titulos_str = ",".join(titulos)
+
+        return f"{self._nome};{self._cpf};{titulos_str} \n"
+
     def __str__(self):
         """Metodo toString para Cliente
             Returns:
                 str: Representação em string do objeto Cliente
         """
-
         return f"Nome: {self._nome} | CPF: {self._cpf} | Livros emprestados: {len(self._lista_emprestimos)}"
     
     def __eq__(self, value) -> bool:
@@ -71,7 +80,6 @@ class Cliente:
         Returns:
             bool: True se os objetos forem iguais, False caso contrário
         """
-
         if not isinstance(value, Cliente):
             return False
 
@@ -82,7 +90,5 @@ class Cliente:
         Returns:
             int: Hash do objeto Cliente
         """
-        
         return hash(self._cpf)
     
-

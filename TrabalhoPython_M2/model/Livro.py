@@ -1,7 +1,5 @@
 
-
 class Livro:
-
 
     def __init__(self, titulo: str, autor: str, ano_publicacao: int, quantidade_disponivel: int):
         """Construtor da classe Livro
@@ -26,6 +24,7 @@ class Livro:
     def autor(self):
         """Metodo getter para o atributo autor"""
         return self._autor
+    
     @property
     def ano_publicacao(self):
         """Metodo getter para o atributo ano_publicacao"""
@@ -42,7 +41,7 @@ class Livro:
 
         self._quantidade_disponivel = quantidade
 
-    def adicionar_livro(self, quantidade: int):
+    def adicionar_quantidade(self, quantidade: int):
         """Adiciona uma quantidade ao estoque do livro
          Args:
             quantidade (int): Quantidade a ser adicionada
@@ -57,7 +56,7 @@ class Livro:
         self._quantidade_disponivel += quantidade
         print(f"Quantidade adicionada: {quantidade}")
 
-    def remover_livro(self, quantidade: int):
+    def remover_quantidade(self, quantidade: int):
         """Remove uma quantidade do estoque do livro
         Args:
             quantidade_removida (int): Quantidade a ser removida
@@ -76,12 +75,35 @@ class Livro:
         self._quantidade_disponivel -= quantidade
         print(f"Quantidade removida: {quantidade}")
         
-    def __eq__():
-        """"""
+    def __eq__(self, value):
+        """Metodo de comparação entre dois objeto Livro
+        Args:
+            value (Livro): Objeto Livro a ser comparado
+        Returns:
+            bool: True se os objetos forem iguais, False caso contrário"""
+
+        if not isinstance(value, Livro):
+            return False
         
+        return self.titulo == value.titulo
+
+    def save(self):
+        """Retorna uma string formatada para savar as informações do livro em um arquivo
+        Returns:
+            str: String formatada com as informações do livro"""
+        
+        return f"{self._titulo};{self._autor};{self._ano_publicacao};{self._quantidade_disponivel} \n"
+    
     def __str__(self) -> str:
         """Exibe as informações do livro:
         Título, Autor, Ano de Publicação e Quantidade Disponível.
         """
         return f"Título: {self._titulo} | Autor: {self._autor} | Ano de Publicação: {self._ano_publicacao} | Quantidade Disponível: {self._quantidade_disponivel}"
+    
+    def __hash__(self) -> int:
+        """Metodo hash para o objeto Livro
+        Returns:
+            int: Valor hash do objeto Livro"""
+        
+        return hash(self._titulo)
     
